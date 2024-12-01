@@ -12,6 +12,7 @@ Para el despliegue de la aplicacion en un entorno se necesita:
 2. Crear un entorno virtual python utilizando los comandos:
 
    > Python -m venv venv
+   
    > venv\Scripts\activate
 
 3. Instalar las dependencias:
