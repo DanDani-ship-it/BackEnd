@@ -24,5 +24,8 @@ Una vez que esta clonado el repositorio y hemos configurado para que funcione te
 
 Si se ejecuto exitosamente nos mostrara que se esta ejecutando en el siguiente enlace http://127.0.0.1:5000!
 
-[imagen_2024-12-01_110324691](https://github.com/user-attachments/assets/79c7525e-4275-46df-921b-e3f3786544c6)
+![InicioSesion](https://github.com/user-attachments/assets/8716bcac-6865-4111-8e1f-5c8a5500e9ff)
 
+
+Una vez que entramos con las Credenciales, nos mostrara la informacion requerida
+![resultado](https://github.com/user-attachments/assets/756ed554-9ddb-4ffe-8ed7-4292072b51bf)
