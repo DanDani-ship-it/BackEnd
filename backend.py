@@ -13,9 +13,9 @@ def login():
     username = request.args.get('username', '')  
     password = request.args.get('password' '') 
 
-    api = 'https://obpreprod.sidesoftcorp.com/comreivicpreprod/org.openbravo.service.json.jsonrest/MaterialMgmtStorageDetail?_startRow=0&_endRow=200'
+    api = 'https://obpreprod.sidesoftcorp.com/comreivicpreprod/org.openbravo.service.json.jsonrest/MaterialMgmtStorageDetail?_startRow=0&_endRow=15000'
     try:
-        
+       
         res =requests.get(api, auth=HTTPBasicAuth(username,password))
         res.raise_for_status()
 
@@ -24,13 +24,15 @@ def login():
         
         datafiltrada= []
         for i in data['response']['data']:
-            datafiltrada.append({
-                
-                'idproducto': i.get('product'),
-                'nombreproducto': i.get('product$_identifier'),
-                'nombremedida': i.get('uOM$_identifier'),
-                'cantidad': i.get('quantityOnHand')
-            })
+            unidad_medida = i.get('uOM$_identifier')
+            if unidad_medida != "UNIDAD":
+                datafiltrada.append({
+                    
+                    'idproducto': i.get('product'),
+                    'nombreproducto': i.get('product$_identifier'),
+                    'nombremedida': unidad_medida,
+                    'cantidad': i.get('quantityOnHand')
+                })
 
         return render_template('resultado.html', data=datafiltrada)
     except requests.exceptions.RequestException as e:
