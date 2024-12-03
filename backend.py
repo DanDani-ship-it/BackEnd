@@ -38,7 +38,7 @@ def login():
         return render_template('resultado.html', data=datafiltrada)
     except requests.exceptions.RequestException as e:
         if res.status_code == 401:
-            error_msg = "Por favor, ingresa un nombre de usuario y una contraseña válidos"
+            error_msg = "Credenciales Incorrectas"
             return render_template('error.html', error=error_msg)
         else :
             return render_template('error.html', error=str(e))
