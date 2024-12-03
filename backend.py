@@ -11,8 +11,11 @@ def index():
 @app.route('/login', methods=['GET'])
 def login():
     username = request.args.get('username', '')  
-    password = request.args.get('password' '')  
+    password = request.args.get('password' '') 
 
+    if not username or not password: 
+        error_msg = "Por favor, ingresa un nombre de usuario y una contraseña válidos" 
+        return render_template('error.html', error=error_msg)
     api = 'https://obpreprod.sidesoftcorp.com/comreivicpreprod/org.openbravo.service.json.jsonrest/MaterialMgmtStorageDetail?_startRow=0&_endRow=200'
     try:
         
@@ -21,7 +24,7 @@ def login():
 
 
         data = res.json()
-        data = res.json()
+        
         datafiltrada= []
         for i in data['response']['data']:
             datafiltrada.append({
@@ -34,8 +37,12 @@ def login():
 
         return render_template('resultado.html', data=datafiltrada)
     except requests.exceptions.RequestException as e:
-        return render_template('error.html', error=str(e))
-    
+        if res.status_code == 401:
+            error_msg = "Por favor, ingresa un nombre de usuario y una contraseña válidos"
+            return render_template('error.html', error=error_msg)
+        else :
+            return render_template('error.html', error=str(e))
+        
 if __name__ == '__main__':
     app.run(debug=True)
 
