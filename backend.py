@@ -13,9 +13,6 @@ def login():
     username = request.args.get('username', '')  
     password = request.args.get('password' '') 
 
-    if not username or not password: 
-        error_msg = "Por favor, ingresa un nombre de usuario y una contraseña válidos" 
-        return render_template('error.html', error=error_msg)
     api = 'https://obpreprod.sidesoftcorp.com/comreivicpreprod/org.openbravo.service.json.jsonrest/MaterialMgmtStorageDetail?_startRow=0&_endRow=200'
     try:
         
@@ -38,8 +35,8 @@ def login():
         return render_template('resultado.html', data=datafiltrada)
     except requests.exceptions.RequestException as e:
         if res.status_code == 401:
-            error_msg = "Credenciales Incorrectas"
-            return render_template('error.html', error=error_msg)
+            error = "Credenciales Incorrectas"
+            return render_template('error.html', error=error)
         else :
             return render_template('error.html', error=str(e))
         
